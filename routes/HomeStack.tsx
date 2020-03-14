@@ -2,6 +2,7 @@ import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import Home from "../src/Home";
 import Options from "../src/Options";
+import WordDetails from "../src/WordDetails";
 
 const screens = {
 	Home: {
@@ -9,6 +10,9 @@ const screens = {
 	},
 	Options: {
 		screen: Options
+	},
+	WordDetails: {
+		screen: WordDetails
 	}
 };
 
