@@ -5,9 +5,9 @@ import { globalStyles } from "../styles/global";
 export default function Home({ navigation })
 {
 	const [words, setWords] = useState([
-		{ translation: "esti", transcription: "esti", meaning: "to be", categories: ["intransitive verb"] },
-		{ translation: "havi", transcription: "havi", meaning: "to have", categories: ["transitive verb"] },
-		{ translation: "pomo", transcription: "pomo", meaning: "apple", categories: ["fruits", "food"] }
+		{ id: "0", translation: "esti", transcription: "esti", meaning: "to be", categories: ["intransitive verb"] },
+		{ id: "1", translation: "havi", transcription: "havi", meaning: "to have", categories: ["transitive verb"] },
+		{ id: "2", translation: "pomo", transcription: "pomo", meaning: "apple", categories: ["fruits", "food"] }
 	]);
 
 	const wordListRenderer = (word) => {
@@ -23,6 +23,7 @@ export default function Home({ navigation })
 		<View style={globalStyles.container}>
 			<FlatList 
 				data={words}
+				keyExtractor={(word) => word.id}
 				renderItem={({ item }) => wordListRenderer(item)}
 			/>
 		</View>

@@ -1,8 +1,8 @@
 import React from 'react';
-import HomeStack from "./routes/HomeStack"
+import Navigator from "./routes/Drawer"
 
 export default function App() {
   return (
-    <HomeStack />
+    <Navigator />
   );
 }
