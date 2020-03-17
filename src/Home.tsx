@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, FlatList, TouchableOpacity } from "react-native";
 import { globalStyles } from "../styles/global";
+import WordContainer from "../shared/WordContainer";
 
 export default function Home({ navigation })
 {
@@ -13,8 +14,7 @@ export default function Home({ navigation })
 	const wordListRenderer = (word) => {
 		return (
 			<TouchableOpacity onPress={() => navigation.push("WordDetails", word)}>
-				<Text style={globalStyles.translation}>{ word.translation } [ {word.transcription} ]</Text>
-				<Text style={globalStyles.meaning}>{ word.meaning } </Text>
+				<WordContainer word={word} />
 			</TouchableOpacity>
 		);
 	};

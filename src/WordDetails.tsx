@@ -6,22 +6,20 @@ export default function WordDetails({ navigation })
 {
 	return (
 		<View style={globalStyles.container}>
-			<Text style={globalStyles.translation}>Translation: </Text>
-			<TextInput style={styles.input}>{ navigation.getParam("translation") }</TextInput>
-			<Text style={globalStyles.translation}>Transcription: </Text>
-			<TextInput style={styles.input}>{ navigation.getParam("transcription") }</TextInput>
-			<Text style={globalStyles.translation}>Translation: </Text>
-			<TextInput style={styles.input}>{ navigation.getParam("meaning") }</TextInput>
+			<TextInput placeholder="translation" style={styles.input}>{ navigation.getParam("translation") }</TextInput>
+			<TextInput placeholder="transcription" style={styles.input}>{ navigation.getParam("transcription") }</TextInput>
+			<TextInput placeholder="meaning" style={styles.input}>{ navigation.getParam("meaning") }</TextInput>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
 	input: {
-		borderWidth: 1,
-		borderColor: "gray",
-		padding: 5,
-		color: "lightgray",
-		fontSize: 18
+		marginHorizontal: 20,
+		marginVertical: 10,
+		padding: 10,
+		backgroundColor: "#555",
+		color: "white",
+		fontSize: 20
 	}
 });
