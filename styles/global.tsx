@@ -8,5 +8,8 @@ export const globalStyles = StyleSheet.create({
 	text: {
 		color: "white",
 		fontSize: 20
+	},
+	button: {
+		backgroundColor: "lime"
 	}
 });
