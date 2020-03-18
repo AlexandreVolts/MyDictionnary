@@ -11,5 +11,13 @@ export const globalStyles = StyleSheet.create({
 	},
 	button: {
 		backgroundColor: "lime"
+	},
+	input: {
+		marginHorizontal: 20,
+		marginVertical: 10,
+		padding: 10,
+		backgroundColor: "#555",
+		color: "white",
+		fontSize: 20
 	}
 });

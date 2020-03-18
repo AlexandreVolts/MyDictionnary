@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, FlatList, TouchableOpacity, Modal, StyleSheet } from "react-native";
+import { View, FlatList, TouchableOpacity, Modal, StyleSheet } from "react-native";
 import { globalStyles } from "../styles/global";
 import IconButton from "../shared/IconButton";
 import WordContainer from "../shared/WordContainer";
+import AddWordForm from "./AddWordForm";
 
 export default function Home({ navigation })
 {
@@ -13,7 +14,8 @@ export default function Home({ navigation })
 		{ id: "2", translation: "pomo", transcription: "pomo", meaning: "apple", categories: ["fruits", "food"] }
 	]);
 
-	const wordListRenderer = (word) => {
+	const wordListRenderer = (word) =>
+	{
 		return (
 			<TouchableOpacity onPress={() => navigation.push("WordDetails", word)}>
 				<WordContainer word={word} />
@@ -25,8 +27,8 @@ export default function Home({ navigation })
 		<View style={globalStyles.container}>
 			<Modal visible={isModalOpened} animationType="slide">
 				<View style={[globalStyles.container, styles.modal]}>
-					<IconButton icon="close" onPress={() => setModalOpen(false)} />
-					<Text>Hi</Text>
+					<IconButton icon="close" onPress={() => setModalOpen(false)} style={styles.closeWordButton} />
+					<AddWordForm />
 				</View>
 			</Modal>
 
@@ -45,6 +47,10 @@ const styles = StyleSheet.create({
 		padding: 20
 	},
 	addWordButton: {
-		margin: 20
+		margin: 20,
+		alignSelf: "flex-start"
+	},
+	closeWordButton: {
+		alignSelf: "center"
 	}
 });

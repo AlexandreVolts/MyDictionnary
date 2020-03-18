@@ -16,7 +16,6 @@ export default function IconButton({ onPress, icon, title = "", style = {} })
 const styles = StyleSheet.create({
 	addWordButton: {
 		flexDirection: "row",
-		alignSelf: "flex-start",
 		padding: 10,
 		borderRadius: 50
 	},
