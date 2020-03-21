@@ -2,7 +2,7 @@ import React from "react";
 import { View, TextInput, Button } from "react-native";
 import { globalStyles } from "../styles/global";
 
-export default function WordDetails({ navigation })
+export default function WordDetails({ route, navigation })
 {
 	const onSave = () =>
 	{
@@ -12,13 +12,13 @@ export default function WordDetails({ navigation })
 	return (
 		<View style={globalStyles.container}>
 			<TextInput placeholder="translation" style={globalStyles.input}>
-				{ navigation.getParam("translation") }
+				{ route.params.translation }
 			</TextInput>
 			<TextInput placeholder="transcription" style={globalStyles.input}>
-				{ navigation.getParam("transcription") }
+				{ route.params.transcription }
 			</TextInput>
 			<TextInput placeholder="meaning" style={globalStyles.input}>
-				{ navigation.getParam("meaning") }
+				{ route.params.meaning }
 			</TextInput>
 			<Button title="Save" onPress={onSave} />
 		</View>

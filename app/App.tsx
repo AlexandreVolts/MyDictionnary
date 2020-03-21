@@ -1,5 +1,5 @@
 import React from 'react';
-import Navigator from "./routes/RootNavigator"
+import Navigator from "./routes/RootNavigator";
 
 export default function App() {
   return (

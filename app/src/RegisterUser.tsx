@@ -1,9 +1,9 @@
 import React from "react";
-import { Button, TextInput, View } from "react-native";
+import { Button, TextInput, View, Text } from "react-native";
 import { Formik } from "formik";
 import { globalStyles } from "../styles/global";
 
-export default function AddWordForm()
+export default function RegisterUser()
 {
 	const onSubmit = (word) =>
 	{
@@ -13,8 +13,9 @@ export default function AddWordForm()
 	{
 		return (
 			<View>
+				<Text>Register !</Text>
 				<TextInput
-					placeholder="Translation"
+					placeholder="Username"
 					onChangeText={props.handleChange("translation")}
 					style={globalStyles.input}
 				>
@@ -34,7 +35,7 @@ export default function AddWordForm()
 				>
 					{props.values.meaning}
 				</TextInput>
-				<Button title="Save" onPress={props.handleSubmit} color="lime" />
+				<Button title="Sign up" onPress={props.handleSubmit} color="lime" />
 			</View>
 		);
 	};
