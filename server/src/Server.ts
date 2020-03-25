@@ -2,6 +2,7 @@ import http = require("http");
 import fs = require("fs");
 import express = require("express");
 import bodyParser = require("body-parser");
+import crypto = require("crypto");
 import firebase from "firebase/app";
 import "firebase/database";
 import "firebase/auth";
@@ -37,24 +38,36 @@ class Server
 		controllers = [
 			//new UsersController(this.app, firebase.database())
 		];
-		this.app.post("/register", (req:express.Request, res:express.Response) => {
-			if (!req.body.email || !req.body.password)
-				res.status(400).send("Email or password is invalid.");
-			this.firebaseApp.auth()
-			.createUserWithEmailAndPassword(req.body.email, req.body.password)
-			.catch((err:firebase.auth.Error) => {
-				res.status(400).send(err.message);
-			});
+		this.app.get("/", (req:express.Request, res:express.Response) => {
+			req;
+			res.send("ok it works");
 		});
-		this.app.post("/login", (req:express.Request, res:express.Response) => {
-			if (!req.body.email || !req.body.password)
-				res.status(400).send("Email or password is invalid.");
-			this.firebaseApp.auth()
-			.signInWithEmailAndPassword(req.body.email, req.body.password)
-			.catch((err:firebase.auth.Error) => {
-				res.status(400).send(err.message);
-			});
+		this.app.post("/register", this.registerUser);
+		this.app.post("/login", this.loginUser);
+	}
+	private registerUser = (req:express.Request, res:express.Response) =>
+	{
+		if (!req.body.email || !req.body.password)
+			res.status(400).send("Email or password is invalid.");
+		req.body.password = crypto.pbkdf2Sync(req.body.password, "", 100, 64, "sha512");
+		this.firebaseApp.auth()
+		.createUserWithEmailAndPassword(req.body.email, req.body.password)
+		.catch((err:firebase.auth.Error) => {
+			res.status(400).send(err.message);
 		});
+		res.send("OK");
+	}
+	private loginUser = (req:express.Request, res:express.Response) =>
+	{
+		if (!req.body.email || !req.body.password)
+			res.status(400).send("Email or password is invalid.");
+		req.body.password = crypto.pbkdf2Sync(req.body.password, "", 100, 64, "sha512");
+		this.firebaseApp.auth()
+		.signInWithEmailAndPassword(req.body.email, req.body.password)
+		.catch((err:firebase.auth.Error) => {
+			res.status(400).send(err.message);
+		});
+		res.send("OK");
 	}
 }
 

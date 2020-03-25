@@ -1,26 +1,23 @@
 import React from "react";
-import { createStackNavigator } from "react-navigation-stack";
+import { createStackNavigator } from "@react-navigation/stack";
 import Options from "../src/Options";
-import Header from "../shared/Header";
 
-const screens = {
-	Options: {
-		screen: Options,
-		navigationOptions: ({ navigation }) => {
-			return ({
-				headerTitle: () => <Header navigation={navigation} />
-			});
-		},
-	},
-};
+const Stack = createStackNavigator();
 
-const OptionsStack = createStackNavigator(screens, {
-	defaultNavigationOptions: {
+export default function OptionsStack() {
+	const headerOptions = {
 		headerTintColor: "#555",
 		headerStyle: {
-			backgroundColor: "#333",
+			backgroundColor: "#333"
+		},
+		headerTitleStyle: {
+			color: "white"
 		}
-	}
-});
+	};
 
-export default OptionsStack;
+	return (
+		<Stack.Navigator>
+			<Stack.Screen name="Options" component={Options} options={headerOptions} />
+		</Stack.Navigator>
+	);
+};

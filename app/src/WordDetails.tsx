@@ -1,11 +1,15 @@
 import React from "react";
 import { View, TextInput, Button } from "react-native";
 import { globalStyles } from "../styles/global";
+import HttpRequest from "../shared/HttpRequest";
 
 export default function WordDetails({ route, navigation })
 {
 	const onSave = () =>
 	{
+		HttpRequest.request("/", "GET").then((res) => {
+			console.log(res);
+		});
 		navigation.goBack();
 	};
 	

@@ -4,6 +4,7 @@ import Home from "../src/Home";
 import WordDetails from "../src/WordDetails";
 
 const Stack = createStackNavigator();
+
 export default function HomeStack()
 {
 	const headerOptions = {
@@ -14,7 +15,8 @@ export default function HomeStack()
 		headerTitleStyle: {
 			color: "white"
 		}
-	}
+	};
+	
 	return (
 		<Stack.Navigator>
 			<Stack.Screen name="Home" component={Home} options={headerOptions} />
