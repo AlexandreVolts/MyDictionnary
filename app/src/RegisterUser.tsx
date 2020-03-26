@@ -1,49 +1,58 @@
 import React from "react";
-import { Button, TextInput, View, Text } from "react-native";
+import { TextInput, View, Text } from "react-native";
 import { Formik } from "formik";
 import { globalStyles } from "../styles/global";
+import HttpRequest from "../shared/HttpRequest";
+import StandardButton from "../shared/StandardButton";
 
-export default function RegisterUser()
+export default function RegisterUser({ navigation })
 {
-	const onSubmit = (word) =>
+	const onAlreadyAccountPressed = () =>
 	{
-
+		navigation.goBack();
+	};
+	const onSubmit = (user) =>
+	{
+		HttpRequest.request("/register", "POST", user).then((res) => {
+			console.log(res);
+		});
 	};
 	const render = (props) =>
 	{
 		return (
-			<View>
-				<Text>Register !</Text>
+			<View style={globalStyles.form}>
 				<TextInput
-					placeholder="Username"
-					onChangeText={props.handleChange("translation")}
+					placeholder="Email"
+					onChangeText={props.handleChange("email")}
 					style={globalStyles.input}
+					keyboardType="email-address"
 				>
-					{props.values.translation}
+					{props.values.email}
 				</TextInput>
 				<TextInput
-					placeholder="Transcription"
-					onChangeText={props.handleChange("transcription")}
+					placeholder="Password"
+					onChangeText={props.handleChange("password")}
 					style={globalStyles.input}
 				>
-					{props.values.transcription}
+					{props.values.password}
 				</TextInput>
 				<TextInput
-					placeholder="Meaning"
-					onChangeText={props.handleChange("meaning")}
+					placeholder="Password Verification"
+					onChangeText={props.handleChange("passwordVerification")}
 					style={globalStyles.input}
 				>
-					{props.values.meaning}
+					{props.values.passwordVerification}
 				</TextInput>
-				<Button title="Sign up" onPress={props.handleSubmit} color="lime" />
+				<StandardButton title="Sign up" onPress={props.handleSubmit} />
+				<Text onPress={onAlreadyAccountPressed} style={globalStyles.link}>I already have an account !</Text>
 			</View>
 		);
 	};
 	
 	return (
-		<View>
+		<View style={globalStyles.container}>
 			<Formik
-				initialValues={{ translation: "", transcription: "", meaning: ""}}
+				initialValues={{ email: "", password: "", passwordVerification: ""}}
 				onSubmit={onSubmit}
 			>
 				{render}

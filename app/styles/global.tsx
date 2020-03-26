@@ -10,7 +10,7 @@ export const globalStyles = StyleSheet.create({
 		fontSize: 20
 	},
 	button: {
-		backgroundColor: "lime"
+		backgroundColor: "green"
 	},
 	input: {
 		marginHorizontal: 20,
@@ -19,5 +19,14 @@ export const globalStyles = StyleSheet.create({
 		backgroundColor: "#555",
 		color: "white",
 		fontSize: 20
+	},
+	link: {
+		color: "cyan",
+		textAlign: "center",
+		fontSize: 12,
+		textDecorationLine: "underline"
+	},
+	form: {
+		
 	}
 });

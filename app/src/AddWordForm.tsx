@@ -1,7 +1,8 @@
 import React from "react";
-import { Button, TextInput, View } from "react-native";
+import { TextInput, View } from "react-native";
 import { Formik } from "formik";
 import { globalStyles } from "../styles/global";
+import StandardButton from "../shared/StandardButton";
 
 export default function AddWordForm()
 {
@@ -34,7 +35,7 @@ export default function AddWordForm()
 				>
 					{props.values.meaning}
 				</TextInput>
-				<Button title="Save" onPress={props.handleSubmit} color="lime" />
+				<StandardButton title="Save" onPress={props.handleSubmit} />
 			</View>
 		);
 	};

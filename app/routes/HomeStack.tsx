@@ -1,5 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import UserStack from "../routes/UserStack";
 import Home from "../src/Home";
 import WordDetails from "../src/WordDetails";
 
@@ -19,6 +20,7 @@ export default function HomeStack()
 	
 	return (
 		<Stack.Navigator>
+			<Stack.Screen name="User" component={UserStack} options={headerOptions} />
 			<Stack.Screen name="Home" component={Home} options={headerOptions} />
 			<Stack.Screen name="WordDetails" component={WordDetails} options={headerOptions} />
 		</Stack.Navigator>

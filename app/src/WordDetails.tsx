@@ -2,6 +2,7 @@ import React from "react";
 import { View, TextInput, Button } from "react-native";
 import { globalStyles } from "../styles/global";
 import HttpRequest from "../shared/HttpRequest";
+import StandardButton from "../shared/StandardButton";
 
 export default function WordDetails({ route, navigation })
 {
@@ -24,7 +25,7 @@ export default function WordDetails({ route, navigation })
 			<TextInput placeholder="meaning" style={globalStyles.input}>
 				{ route.params.meaning }
 			</TextInput>
-			<Button title="Save" onPress={onSave} />
+			<StandardButton title="Save word" onPress={onSave} />
 		</View>
 	);
 }
