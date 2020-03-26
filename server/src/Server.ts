@@ -2,28 +2,25 @@ import http = require("http");
 import fs = require("fs");
 import express = require("express");
 import bodyParser = require("body-parser");
-import crypto = require("crypto");
 import firebase from "firebase/app";
-import "firebase/database";
-import "firebase/auth";
 import Database from "./Database";
 import APIController from "./APIController";
-import UsersController from "./UsersController";
+import FirebaseUserService from "./FirebaseUserService";
 
-class Server
+export default class Server
 {
 	private readonly PORT:number;
 	private app = express();
 	private server:http.Server;
 	private config:any = JSON.parse(fs.readFileSync("config.json", "utf8"));
-	private firebaseApp:firebase.app.App;
+	private firebaseApp = firebase.initializeApp(this.config.firebase);
+	private fus?:FirebaseUserService;
 
 	constructor(port:number)
 	{
 		this.PORT = port;
 		this.app.use(bodyParser.json());
 		this.server = this.app.listen(this.PORT, this.initialise);
-		this.firebaseApp = firebase.initializeApp(this.config.firebase);
 	}
 
 	private initialise = (err:string):void =>
@@ -36,39 +33,12 @@ class Server
 		}
 		console.log(`Server is running on port ${this.PORT}.`);
 		controllers = [
-			//new UsersController(this.app, firebase.database())
+			
 		];
 		this.app.get("/", (req:express.Request, res:express.Response) => {
 			req;
-			res.send("ok it works");
+			res.json({response: "ok it works"});
 		});
-		this.app.post("/register", this.registerUser);
-		this.app.post("/login", this.loginUser);
-	}
-	private registerUser = (req:express.Request, res:express.Response) =>
-	{
-		if (!req.body.email || !req.body.password)
-			res.status(400).send("Email or password is invalid.");
-		req.body.password = crypto.pbkdf2Sync(req.body.password, "", 100, 64, "sha512");
-		this.firebaseApp.auth()
-		.createUserWithEmailAndPassword(req.body.email, req.body.password)
-		.catch((err:firebase.auth.Error) => {
-			res.status(400).send(err.message);
-		});
-		res.send("OK");
-	}
-	private loginUser = (req:express.Request, res:express.Response) =>
-	{
-		if (!req.body.email || !req.body.password)
-			res.status(400).send("Email or password is invalid.");
-		req.body.password = crypto.pbkdf2Sync(req.body.password, "", 100, 64, "sha512");
-		this.firebaseApp.auth()
-		.signInWithEmailAndPassword(req.body.email, req.body.password)
-		.catch((err:firebase.auth.Error) => {
-			res.status(400).send(err.message);
-		});
-		res.send("OK");
+		this.fus = new FirebaseUserService(this.app, this.firebaseApp);
 	}
 }
-
-export default Server;

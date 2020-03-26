@@ -2,13 +2,13 @@ import express = require("express");
 
 export default abstract class APIController
 {
-	constructor(protected app:express.Express, route:string)
+	constructor(app:express.Express, route:string)
 	{
-		this.app.get(`${route}/:id`, this.get);
-		this.app.get(route, this.getAll);
-		this.app.post(route, this.post);
-		this.app.put(route, this.put);
-		this.app.delete(route, this.delete);
+		app.get(`${route}/:id`, this.get);
+		app.get(route, this.getAll);
+		app.post(route, this.post);
+		app.put(route, this.put);
+		app.delete(route, this.delete);
 	}
 	
 	protected abstract get(req:express.Request, res:express.Response):void;
